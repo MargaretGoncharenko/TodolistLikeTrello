@@ -8,6 +8,7 @@ export type tasksType = {
     text: string
     checked: boolean
 }
+export type filterType = "all"|"active"|"completed"
 
 function App() {
     const [tasks, setTasks] = useState([
@@ -25,12 +26,26 @@ function App() {
         const AllTasks = [newTask, ...tasks]
         setTasks(AllTasks)
     }
+    let tasksForTodolist = tasks;
+    const [filter, setFilter] = useState<filterType>("all")
+    if (filter === "active") {
+        tasksForTodolist = tasks.filter(t => !t.checked);
+    }
+    if (filter === "completed") {
+        tasksForTodolist = tasks.filter(t => t.checked);
+    }
+    const ChangeTasksFilter = (value: filterType) => {
+        setFilter(value);
+    }
+
     return (
         <div className="Todolist">
             <Todolist title={"What to learn"}
-                      tasks={tasks}
+                      tasks={tasksForTodolist}
                       deleteTask={DeleteTask}
                       addNewTask={AddNewTask}
+                      changeTasksFilter={ChangeTasksFilter}
+
             />
         </div>
     )

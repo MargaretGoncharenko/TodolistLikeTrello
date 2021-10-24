@@ -1,12 +1,13 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from "react";
 import t from "./Todolist.module.css";
-import {tasksType} from "./App";
+import {filterType, tasksType} from "./App";
 
 type TodolistProps = {
     title: string
     tasks: Array<tasksType>
     deleteTask: (id: string) => void
     addNewTask: (text: string) => void
+    changeTasksFilter: (value: filterType) => void
 }
 export const Todolist = (props: TodolistProps) => {
     const [text, setText] = useState("")
@@ -23,6 +24,15 @@ export const Todolist = (props: TodolistProps) => {
         if (e.charCode === 13 && text) {
             onClickAddNewTaskHandler()
         }
+    }
+    const onAllFilterClickHandler = () => {
+        props.changeTasksFilter("all")
+    }
+    const onActiveFilterClickHandler = () => {
+        props.changeTasksFilter("active")
+    }
+    const onCompletedFilterClickHandler = () => {
+        props.changeTasksFilter("completed")
     }
     return (
         <div>
@@ -44,6 +54,9 @@ export const Todolist = (props: TodolistProps) => {
                     })
                 }
             </ul>
+            <button onClick={onAllFilterClickHandler}>all</button>
+            <button onClick={onActiveFilterClickHandler}>active</button>
+            <button onClick={onCompletedFilterClickHandler}>completed</button>
         </div>
     )
 }

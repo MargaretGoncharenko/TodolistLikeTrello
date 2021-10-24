@@ -8,7 +8,7 @@ export type tasksType = {
     text: string
     checked: boolean
 }
-export type filterType = "all"|"active"|"completed"
+export type filterType = "all" | "active" | "completed"
 
 function App() {
     const [tasks, setTasks] = useState([
@@ -37,6 +37,13 @@ function App() {
     const ChangeTasksFilter = (value: filterType) => {
         setFilter(value);
     }
+    const changeTaskStatus = (taskID: string, changedStatus: boolean) => {
+        let task = tasks.find(t => t.id == taskID);
+        if (task) {
+            task.checked = changedStatus
+            setTasks([...tasks]);
+        }
+    }
 
     return (
         <div className="Todolist">
@@ -45,7 +52,7 @@ function App() {
                       deleteTask={DeleteTask}
                       addNewTask={AddNewTask}
                       changeTasksFilter={ChangeTasksFilter}
-
+                      changeTaskStatus={changeTaskStatus}
             />
         </div>
     )

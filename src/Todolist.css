@@ -7,3 +7,9 @@ li {
     margin-bottom: 10px;
     font-weight: bold;
 }
+.error{
+    border: 1px solid red;
+}
+.errorMessage{
+    color: red;
+}

@@ -9,6 +9,7 @@ type TodolistProps = {
     addNewTask: (text: string) => void
     changeTasksFilter: (value: filterType) => void
     changeTaskStatus: (taskID: string, changedStatus: boolean) => void
+    filter: filterType
 
 }
 export const Todolist = (props: TodolistProps) => {
@@ -67,9 +68,15 @@ export const Todolist = (props: TodolistProps) => {
                     })
                 }
             </ul>
-            <button onClick={onAllFilterClickHandler}>all</button>
-            <button onClick={onActiveFilterClickHandler}>active</button>
-            <button onClick={onCompletedFilterClickHandler}>completed</button>
+            <button className={props.filter === "all" ? "activeButton" : ""}
+                    onClick={onAllFilterClickHandler}>all
+            </button>
+            <button className={props.filter === "active" ? "activeButton" : ""}
+                    onClick={onActiveFilterClickHandler}>active
+            </button>
+            <button className={props.filter === "completed" ? "activeButton" : ""}
+                    onClick={onCompletedFilterClickHandler}>completed
+            </button>
         </div>
     )
 }

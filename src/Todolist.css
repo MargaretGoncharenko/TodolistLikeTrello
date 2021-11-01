@@ -30,3 +30,6 @@ button {
     color: white;
     font-weight: bold;
 }
+.isDone{
+    opacity: 0.7;
+}

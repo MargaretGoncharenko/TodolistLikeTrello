@@ -16,8 +16,8 @@ export const Todolist = (props: TodolistProps) => {
     const [text, setText] = useState("")
     const [error, setError] = useState<string | null>(null)
     const onClickAddNewTaskHandler = () => {
-        if (text) {
-            props.addNewTask(text.trim());
+        if (text.trim() !== "") {
+            props.addNewTask(text);
             setText("");
         } else {
             setError("Title is required");
@@ -60,7 +60,7 @@ export const Todolist = (props: TodolistProps) => {
                             props.changeTaskStatus(t.id, changedTaskStatus);
                         }
                         return (
-                            <li key={t.id}>
+                            <li key={t.id} className={t.checked ? "isDone" : ""}>
                                 <button onClick={onClickDeleteTaskHandler}>X</button>
                                 <input type="checkbox" onChange={onChangeTaskStatusHandler}
                                        checked={t.checked}/>{t.text}

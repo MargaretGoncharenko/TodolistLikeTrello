@@ -62,6 +62,12 @@ function App() {
             {id: v1(), text: "bread", checked: true},
         ]
     })
+    const DeleteTodolist = (todolistID:string) => {
+        let FilteredTodolists=Todolists.filter(tl => tl.id != todolistID);
+        setTodolists(FilteredTodolists);
+        delete tasksObj[todolistID];
+        setTasks({...tasksObj})
+    }
     return (
         <div className="Todolist">
             {
@@ -84,6 +90,7 @@ function App() {
                             changeTasksFilter={ChangeTasksFilter}
                             changeTaskStatus={changeTaskStatus}
                             filter={tl.filter}
+                            deleteTodolist={DeleteTodolist}
                         />
                     )
                 })

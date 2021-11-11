@@ -6,10 +6,10 @@ type TodolistProps = {
     id: string
     title: string
     tasks: Array<tasksType>
-    deleteTask: (id: string) => void
-    addNewTask: (text: string) => void
+    deleteTask: (id: string, todolistID: string) => void
+    addNewTask: (text: string, todolistID: string) => void
     changeTasksFilter: (value: filterType, todolistID: string) => void
-    changeTaskStatus: (taskID: string, changedStatus: boolean) => void
+    changeTaskStatus: (taskID: string, changedStatus: boolean, todolistID: string) => void
     filter: filterType
 
 }
@@ -18,7 +18,7 @@ export const Todolist = (props: TodolistProps) => {
     const [error, setError] = useState<string | null>(null)
     const onClickAddNewTaskHandler = () => {
         if (text.trim() !== "") {
-            props.addNewTask(text);
+            props.addNewTask(text, props.id);
             setText("");
         } else {
             setError("Title is required");
@@ -55,10 +55,10 @@ export const Todolist = (props: TodolistProps) => {
             <ul>
                 {
                     props.tasks.map(t => {
-                        let onClickDeleteTaskHandler = () => props.deleteTask(t.id)
+                        let onClickDeleteTaskHandler = () => props.deleteTask(t.id, props.id)
                         const onChangeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
                             let changedTaskStatus = e.currentTarget.checked;
-                            props.changeTaskStatus(t.id, changedTaskStatus);
+                            props.changeTaskStatus(t.id, changedTaskStatus, props.id);
                         }
                         return (
                             <li key={t.id} className={t.checked ? "isDone" : ""}>

@@ -16,22 +16,19 @@ type TodolistsProps = {
 }
 
 function App() {
-    const [tasks, setTasks] = useState([
-        {id: v1(), text: "HTML", checked: true},
-        {id: v1(), text: "CSS", checked: true},
-        {id: v1(), text: "JS/TS", checked: false},
-        {id: v1(), text: "REACT/REDUX", checked: false},
-    ])
-    const DeleteTask = (id: string) => {
-        const FilteredTasks = tasks.filter(t => t.id !== id)
-        setTasks(FilteredTasks);
+    const DeleteTask = (id: string, todolistID: string) => {
+        let tasks = tasksObj[todolistID];
+        const FilteredTasks = tasks.filter(t => t.id !== id);
+        tasksObj[todolistID] = FilteredTasks;
+        setTasks({...tasksObj});
     }
-    const AddNewTask = (text: string) => {
-        const newTask = {id: v1(), text: text, checked: false}
-        const AllTasks = [newTask, ...tasks]
-        setTasks(AllTasks)
+    const AddNewTask = (text: string, todolistID: string) => {
+        let tasks = tasksObj[todolistID];
+        const newTask = {id: v1(), text: text, checked: false};
+        const AllTasks = [newTask, ...tasks];
+        tasksObj[todolistID] = AllTasks;
+        setTasks({...tasksObj})
     }
-
     const ChangeTasksFilter = (value: filterType, todolistID: string) => {
         let todolist = Todolists.find(tl => tl.id == todolistID);
         if (todolist) {
@@ -39,27 +36,42 @@ function App() {
             setTodolists([...Todolists])
         }
     }
-    const changeTaskStatus = (taskID: string, changedStatus: boolean) => {
+    const changeTaskStatus = (taskID: string, changedStatus: boolean, todolistID: string) => {
+        let tasks = tasksObj[todolistID];
         let task = tasks.find(t => t.id == taskID);
         if (task) {
-            task.checked = changedStatus
-            setTasks([...tasks]);
+            task.checked = changedStatus;
+            setTasks({...tasksObj});
         }
     }
+    const todolist1ID = v1();
+    const todolist2ID = v1();
     const [Todolists, setTodolists] = useState<Array<TodolistsProps>>([
-        {id: v1(), title: "What to learn", filter: "active"},
-        {id: v1(), title: "What to buy", filter: "completed"},
+        {id: todolist1ID, title: "What to learn", filter: "active"},
+        {id: todolist2ID, title: "What to buy", filter: "completed"},
     ])
+    const [tasksObj, setTasks] = useState({
+        [todolist1ID]: [
+            {id: v1(), text: "HTML", checked: true},
+            {id: v1(), text: "CSS", checked: true},
+            {id: v1(), text: "JS/TS", checked: false},
+            {id: v1(), text: "REACT/REDUX", checked: false},
+        ],
+        [todolist2ID]: [
+            {id: v1(), text: "milk", checked: false},
+            {id: v1(), text: "bread", checked: true},
+        ]
+    })
     return (
         <div className="Todolist">
             {
                 Todolists.map(tl => {
-                    let tasksForTodolist = tasks;
+                    let tasksForTodolist = tasksObj[tl.id];
                     if (tl.filter === "active") {
-                        tasksForTodolist = tasks.filter(t => !t.checked);
+                        tasksForTodolist = tasksForTodolist.filter(t => !t.checked);
                     }
                     if (tl.filter === "completed") {
-                        tasksForTodolist = tasks.filter(t => t.checked);
+                        tasksForTodolist = tasksForTodolist.filter(t => t.checked);
                     }
                     return (
                         <Todolist

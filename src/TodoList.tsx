@@ -3,11 +3,12 @@ import "./Todolist.css";
 import {filterType, tasksType} from "./App";
 
 type TodolistProps = {
+    id: string
     title: string
     tasks: Array<tasksType>
     deleteTask: (id: string) => void
     addNewTask: (text: string) => void
-    changeTasksFilter: (value: filterType) => void
+    changeTasksFilter: (value: filterType, todolistID: string) => void
     changeTaskStatus: (taskID: string, changedStatus: boolean) => void
     filter: filterType
 
@@ -33,16 +34,16 @@ export const Todolist = (props: TodolistProps) => {
         }
     }
     const onAllFilterClickHandler = () => {
-        props.changeTasksFilter("all")
+        props.changeTasksFilter("all", props.id)
     }
     const onActiveFilterClickHandler = () => {
-        props.changeTasksFilter("active")
+        props.changeTasksFilter("active", props.id)
     }
     const onCompletedFilterClickHandler = () => {
-        props.changeTasksFilter("completed")
+        props.changeTasksFilter("completed", props.id)
     }
     return (
-        <div>
+        <div className="Todolist">
             <div className="title">{props.title}</div>
             <input value={text}
                    onChange={onChangeInputHandler}

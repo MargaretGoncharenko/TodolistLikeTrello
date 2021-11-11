@@ -33,3 +33,9 @@ button {
 .isDone{
     opacity: 0.7;
 }
+.Todolist{
+    display: inline-block;
+
+    padding: 25px;
+    width: fit-content;
+}

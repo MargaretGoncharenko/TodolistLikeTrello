@@ -50,8 +50,8 @@ function App() {
     const todolist1ID = v1();
     const todolist2ID = v1();
     const [Todolists, setTodolists] = useState<Array<TodolistsProps>>([
-        {id: todolist1ID, title: "What to learn", filter: "active"},
-        {id: todolist2ID, title: "What to buy", filter: "completed"},
+        {id: todolist1ID, title: "What to learn", filter: "all"},
+        {id: todolist2ID, title: "What to buy", filter: "all"},
     ])
     const [tasksObj, setTasks] = useState({
         [todolist1ID]: [

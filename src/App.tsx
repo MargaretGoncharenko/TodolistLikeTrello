@@ -12,7 +12,7 @@ export type tasksType = {
     checked: boolean
 }
 export type filterType = "all" | "active" | "completed"
-type TodolistsProps = {
+export type TodolistsProps = {
     id: string
     title: string
     filter: filterType

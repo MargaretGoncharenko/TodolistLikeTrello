@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/TodolistLikeTrello/static/css/main.e3392f42.chunk.css",
-    "main.js": "/TodolistLikeTrello/static/js/main.384e44a0.chunk.js",
-    "main.js.map": "/TodolistLikeTrello/static/js/main.384e44a0.chunk.js.map",
+    "main.js": "/TodolistLikeTrello/static/js/main.9a2d1625.chunk.js",
+    "main.js.map": "/TodolistLikeTrello/static/js/main.9a2d1625.chunk.js.map",
     "runtime-main.js": "/TodolistLikeTrello/static/js/runtime-main.7785a2e0.js",
     "runtime-main.js.map": "/TodolistLikeTrello/static/js/runtime-main.7785a2e0.js.map",
     "static/js/2.8bb63828.chunk.js": "/TodolistLikeTrello/static/js/2.8bb63828.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.7785a2e0.js",
     "static/js/2.8bb63828.chunk.js",
     "static/css/main.e3392f42.chunk.css",
-    "static/js/main.384e44a0.chunk.js"
+    "static/js/main.9a2d1625.chunk.js"
   ]
 }
